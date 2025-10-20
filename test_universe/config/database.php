@@ -1,7 +1,7 @@
 <?php
 class Database {
     private $host = "localhost";
-    private $db_name = "cosmic_universe_db";
+    private $db_name = "Cosmic_Universe_DB";
     private $username = "root";
     private $password = "";
     public $conn;
@@ -10,20 +10,15 @@ class Database {
         $this->conn = null;
         try {
             $this->conn = new PDO(
-                "mysql:host=" . $this->host . ";dbname=" . $this->db_name . ";charset=utf8",
+                "mysql:host=" . $this->host . ";dbname=" . $this->db_name . ";charset=utf8mb4",
                 $this->username, 
                 $this->password
             );
             $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->conn->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
+            $this->conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
         } catch(PDOException $exception) {
-            // Return JSON error instead of HTML
-            header('Content-Type: application/json');
-            echo json_encode([
-                "success" => false,
-                "message" => "Database connection failed: " . $exception->getMessage()
-            ]);
-            exit;
+            error_log("Database connection error: " . $exception->getMessage());
+            $this->conn = null;
         }
         return $this->conn;
     }

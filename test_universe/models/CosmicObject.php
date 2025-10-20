@@ -11,8 +11,6 @@ class CosmicObject {
     public $distance_from_earth_ly;
     public $constellation;
     public $description;
-    public $created_at;
-    public $updated_at;
 
     public function __construct($db) {
         $this->conn = $db;
@@ -44,10 +42,11 @@ class CosmicObject {
 
             $stmt = $this->conn->prepare($query);
             $stmt->execute();
-
             return $stmt;
+
         } catch (PDOException $e) {
-            throw new Exception("Query failed: " . $e->getMessage());
+            error_log("CosmicObject readAll error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
         }
     }
 
@@ -77,27 +76,47 @@ class CosmicObject {
             $stmt->bindParam(":description", $this->description);
 
             if($stmt->execute()) {
-                return true;
+                return $this->conn->lastInsertId();
             }
             return false;
+
         } catch (PDOException $e) {
-            throw new Exception("Create failed: " . $e->getMessage());
+            error_log("CosmicObject create error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
         }
     }
 
     // Delete cosmic object
     public function delete() {
         try {
-            $query = "DELETE FROM " . $this->table_name . " WHERE id = ?";
+            $query = "DELETE FROM " . $this->table_name . " WHERE id = :id";
             $stmt = $this->conn->prepare($query);
-            $stmt->bindParam(1, $this->id);
+            $stmt->bindParam(":id", $this->id);
 
-            if($stmt->execute()) {
-                return true;
+            return $stmt->execute();
+
+        } catch (PDOException $e) {
+            error_log("CosmicObject delete error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
+        }
+    }
+
+    // Get cosmic object by ID
+    public function getById($id) {
+        try {
+            $query = "SELECT * FROM " . $this->table_name . " WHERE id = :id";
+            $stmt = $this->conn->prepare($query);
+            $stmt->bindParam(":id", $id);
+            $stmt->execute();
+
+            if($stmt->rowCount() > 0) {
+                return $stmt->fetch();
             }
             return false;
+
         } catch (PDOException $e) {
-            throw new Exception("Delete failed: " . $e->getMessage());
+            error_log("CosmicObject getById error: " . $e->getMessage());
+            throw new Exception("Database error: " . $e->getMessage());
         }
     }
 }

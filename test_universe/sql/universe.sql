@@ -55,3 +55,23 @@ INSERT INTO object_facts (cosmic_object_id, fact_description, discovery_year, fa
 (6, 'Tidak memiliki atmosfer yang signifikan', 1639, 'Scientific', 'High'),
 (7, 'Ditemukan melalui perhitungan matematika sebelum diamati secara langsung', 1846, 'Historical', 'High'),
 (8, 'Cincin Saturnus sebagian besar terbuat dari partikel es dengan sedikit batuan', 1610, 'Scientific', 'High');
+
+-- Tambahkan tabel users
+CREATE TABLE IF NOT EXISTS users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    username VARCHAR(50) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    role ENUM('admin', 'user', 'researcher', 'student') DEFAULT 'user',
+    avatar VARCHAR(255),
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Insert demo users
+INSERT INTO users (first_name, last_name, email, username, password, role, avatar) VALUES
+('Admin', 'User', 'admin@universe.com', 'admin', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'admin', 'https://ui-avatars.com/api/?name=Admin+User&background=00d4ff&color=fff'),
+('Regular', 'User', 'user@universe.com', 'user', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'user', 'https://ui-avatars.com/api/?name=Regular+User&background=6f42c1&color=fff');

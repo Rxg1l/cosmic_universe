@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Universe Explorer - Cosmic Objects Database</title>
+    <title>Universe Explorer - Discover the Cosmos</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -16,13 +16,13 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
       rel="stylesheet"
     />
-    <link href="style.css" rel="stylesheet" />
+    <link href="assets/css/style.css" rel="stylesheet" />
   </head>
-  <body class="dark-theme">
+  <body class="homepage">
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark cosmic-nav">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">
           <i class="fas fa-rocket me-2"></i>
           <strong>Universe Explorer</strong>
         </a>
@@ -35,335 +35,290 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav me-auto">
+          <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link active" href="#">
-                <i class="fas fa-stars"></i> Cosmic Objects
-              </a>
+              <a class="nav-link active" href="index.html">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
-                <i class="fas fa-chart-bar"></i> Analytics
-              </a>
+              <a class="nav-link" href="#features">Features</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
-                <i class="fas fa-cog"></i> Settings
-              </a>
+              <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="login.html">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="btn btn-primary ms-2" href="register.html"
+                >Get Started</a
+              >
             </li>
           </ul>
-          <div class="navbar-nav">
-            <div class="nav-item">
-              <span class="nav-link text-warning">
-                <i class="fas fa-database me-1"></i>
-                <span id="objectCount">0</span> Objects
-              </span>
-            </div>
-          </div>
         </div>
       </div>
     </nav>
 
-    <!-- Main Content -->
-    <div class="container-fluid mt-4">
-      <div class="row">
-        <!-- Sidebar -->
-        <div class="col-lg-2 col-md-3 d-none d-md-block">
-          <div class="cosmic-sidebar">
-            <div class="sidebar-header">
-              <h5>Filters</h5>
-            </div>
-            <div class="sidebar-content">
-              <div class="mb-3">
-                <label class="form-label">Object Type</label>
-                <select class="form-select cosmic-select" id="typeFilter">
-                  <option value="">All Types</option>
-                  <option value="Planet">Planet</option>
-                  <option value="Star">Star</option>
-                  <option value="Moon">Moon</option>
-                  <option value="Galaxy">Galaxy</option>
-                  <option value="Nebula">Nebula</option>
-                  <option value="Black Hole">Black Hole</option>
-                </select>
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="container">
+        <div class="row align-items-center min-vh-100">
+          <div class="col-lg-6">
+            <div class="hero-content animate__animated animate__fadeInLeft">
+              <h1 class="hero-title">
+                Explore the
+                <span class="text-gradient">Universe</span>
+              </h1>
+              <p class="hero-subtitle">
+                Discover the wonders of our cosmos. From distant galaxies to
+                nearby planets, explore comprehensive data about celestial
+                objects in our universe.
+              </p>
+              <div class="hero-buttons">
+                <a href="register.html" class="btn btn-primary btn-lg me-3">
+                  <i class="fas fa-rocket me-2"></i>Start Exploring
+                </a>
+                <a href="#features" class="btn btn-outline-light btn-lg">
+                  <i class="fas fa-info-circle me-2"></i>Learn More
+                </a>
               </div>
-              <div class="mb-3">
-                <label class="form-label">Search</label>
-                <input
-                  type="text"
-                  class="form-control cosmic-input"
-                  id="searchInput"
-                  placeholder="Search objects..."
-                />
-              </div>
-              <div class="mb-3">
-                <label class="form-label">Credibility</label>
-                <select
-                  class="form-select cosmic-select"
-                  id="credibilityFilter"
-                >
-                  <option value="">All Ratings</option>
-                  <option value="High">High</option>
-                  <option value="Medium">Medium</option>
-                  <option value="Low">Low</option>
-                </select>
-              </div>
-              <button
-                class="btn btn-outline-warning w-100"
-                onclick="resetFilters()"
-              >
-                <i class="fas fa-refresh me-2"></i>Reset Filters
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Content Area -->
-        <div class="col-lg-10 col-md-9">
-          <!-- Header Stats -->
-          <div class="row mb-4">
-            <div class="col-xl-3 col-md-6">
-              <div class="cosmic-card stat-card planet-card">
-                <div class="stat-icon">
-                  <i class="fas fa-globe-americas"></i>
-                </div>
-                <div class="stat-content">
-                  <h3 id="planetCount">0</h3>
-                  <p>Planets</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="cosmic-card stat-card star-card">
-                <div class="stat-icon">
-                  <i class="fas fa-sun"></i>
-                </div>
-                <div class="stat-content">
-                  <h3 id="starCount">0</h3>
-                  <p>Stars</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="cosmic-card stat-card galaxy-card">
-                <div class="stat-icon">
-                  <i class="fas fa-star-and-crescent"></i>
-                </div>
-                <div class="stat-content">
-                  <h3 id="galaxyCount">0</h3>
-                  <p>Galaxies</p>
-                </div>
-              </div>
-            </div>
-            <div class="col-xl-3 col-md-6">
-              <div class="cosmic-card stat-card total-card">
-                <div class="stat-icon">
-                  <i class="fas fa-infinity"></i>
-                </div>
-                <div class="stat-content">
-                  <h3 id="totalCount">0</h3>
-                  <p>Total Objects</p>
+              <div class="hero-stats mt-5">
+                <div class="row">
+                  <div class="col-4">
+                    <div class="stat">
+                      <h3>1000+</h3>
+                      <p>Celestial Objects</p>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="stat">
+                      <h3>50+</h3>
+                      <p>Constellations</p>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="stat">
+                      <h3>24/7</h3>
+                      <p>Updated Data</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-
-          <!-- Action Bar -->
-          <div class="cosmic-card action-bar mb-4">
-            <div class="row align-items-center">
-              <div class="col-md-6">
-                <h4 class="mb-0">
-                  <i class="fas fa-stars me-2 text-warning"></i>
-                  Cosmic Objects Database
-                </h4>
-              </div>
-              <div class="col-md-6 text-end">
-                <button
-                  class="btn btn-primary me-2"
-                  data-bs-toggle="modal"
-                  data-bs-target="#addObjectModal"
-                >
-                  <i class="fas fa-plus me-2"></i>Add New Object
-                </button>
-                <button
-                  class="btn btn-outline-info"
-                  onclick="loadCosmicObjects()"
-                >
-                  <i class="fas fa-refresh me-2"></i>Refresh
-                </button>
+          <div class="col-lg-6">
+            <div class="hero-visual animate__animated animate__fadeInRight">
+              <div class="cosmic-animation">
+                <div class="planet earth"></div>
+                <div class="planet mars"></div>
+                <div class="planet jupiter"></div>
+                <div class="stars"></div>
               </div>
             </div>
-          </div>
-
-          <!-- Loading -->
-          <div id="loading" class="text-center py-5">
-            <div class="cosmic-loading">
-              <div class="planet-loader">
-                <div class="orbit">
-                  <div class="planet"></div>
-                </div>
-              </div>
-              <h4 class="mt-3 text-light">Exploring the Universe...</h4>
-              <p class="text-muted">Loading cosmic objects data</p>
-            </div>
-          </div>
-
-          <!-- Data Grid -->
-          <div id="dataContainer" style="display: none">
-            <div class="row" id="cosmicObjectsGrid">
-              <!-- Cards will be inserted here by JavaScript -->
-            </div>
-          </div>
-
-          <!-- Error Message -->
-          <div
-            id="errorMessage"
-            class="alert alert-danger cosmic-alert"
-            style="display: none"
-          >
-            <i class="fas fa-exclamation-triangle me-2"></i>
-            <span id="errorText"></span>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Add Object Modal -->
-    <div class="modal fade" id="addObjectModal" tabindex="-1">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content cosmic-modal">
-          <div class="modal-header">
-            <h5 class="modal-title">
-              <i class="fas fa-plus me-2"></i>Add New Cosmic Object
-            </h5>
-            <button
-              type="button"
-              class="btn-close btn-close-white"
-              data-bs-dismiss="modal"
-            ></button>
+    <!-- Features Section -->
+    <section id="features" class="features-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center mb-5">
+            <h2 class="section-title">Amazing Features</h2>
+            <p class="section-subtitle">
+              Discover what makes Universe Explorer unique
+            </p>
           </div>
-          <div class="modal-body">
-            <form id="addObjectForm">
-              <div class="row">
-                <div class="col-md-6">
-                  <div class="mb-3">
-                    <label class="form-label">Object Name *</label>
-                    <input
-                      type="text"
-                      class="form-control cosmic-input"
-                      name="name"
-                      required
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label class="form-label">Type *</label>
-                    <select
-                      class="form-select cosmic-select"
-                      name="type"
-                      required
-                    >
-                      <option value="">Select Type</option>
-                      <option value="Planet">Planet</option>
-                      <option value="Star">Star</option>
-                      <option value="Moon">Moon</option>
-                      <option value="Galaxy">Galaxy</option>
-                      <option value="Nebula">Nebula</option>
-                      <option value="Black Hole">Black Hole</option>
-                    </select>
-                  </div>
-                  <div class="mb-3">
-                    <label class="form-label">Diameter (km)</label>
-                    <input
-                      type="number"
-                      step="0.01"
-                      class="form-control cosmic-input"
-                      name="diameter_km"
-                    />
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="mb-3">
-                    <label class="form-label">Mass (kg)</label>
-                    <input
-                      type="number"
-                      step="0.01"
-                      class="form-control cosmic-input"
-                      name="mass_kg"
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label class="form-label"
-                      >Distance from Earth (light years)</label
-                    >
-                    <input
-                      type="number"
-                      step="0.01"
-                      class="form-control cosmic-input"
-                      name="distance_from_earth_ly"
-                    />
-                  </div>
-                  <div class="mb-3">
-                    <label class="form-label">Constellation</label>
-                    <input
-                      type="text"
-                      class="form-control cosmic-input"
-                      name="constellation"
-                    />
-                  </div>
-                </div>
+        </div>
+        <div class="row">
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-database"></i>
               </div>
-              <div class="mb-3">
-                <label class="form-label">Description</label>
-                <textarea
-                  class="form-control cosmic-input"
-                  name="description"
-                  rows="3"
-                  placeholder="Enter object description..."
-                ></textarea>
-              </div>
-            </form>
+              <h4>Comprehensive Database</h4>
+              <p>
+                Access detailed information about planets, stars, galaxies, and
+                other celestial objects with verified scientific data.
+              </p>
+            </div>
           </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-bs-dismiss="modal"
-            >
-              Cancel
-            </button>
-            <button
-              type="button"
-              class="btn btn-primary"
-              onclick="addCosmicObject()"
-            >
-              <i class="fas fa-save me-2"></i>Save Object
-            </button>
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-chart-line"></i>
+              </div>
+              <h4>Real-time Analytics</h4>
+              <p>
+                Track and analyze cosmic data with interactive charts and
+                real-time statistics about our universe.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-users"></i>
+              </div>
+              <h4>Multi-user System</h4>
+              <p>
+                Different access levels for admins and users with customized
+                permissions and capabilities.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-mobile-alt"></i>
+              </div>
+              <h4>Responsive Design</h4>
+              <p>
+                Access the platform from any device - desktop, tablet, or mobile
+                with optimized experience.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-search"></i>
+              </div>
+              <h4>Advanced Search</h4>
+              <p>
+                Find specific celestial objects using powerful search filters
+                and intelligent categorization.
+              </p>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-6 mb-4">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-shield-alt"></i>
+              </div>
+              <h4>Secure Platform</h4>
+              <p>
+                Your data is protected with modern security protocols and
+                encrypted communications.
+              </p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Object Details Modal -->
-    <div class="modal fade" id="objectDetailsModal" tabindex="-1">
-      <div class="modal-dialog modal-lg">
-        <div class="modal-content cosmic-modal">
-          <div class="modal-header">
-            <h5 class="modal-title" id="detailsModalTitle">
-              <i class="fas fa-info-circle me-2"></i>Object Details
-            </h5>
-            <button
-              type="button"
-              class="btn-close btn-close-white"
-              data-bs-dismiss="modal"
-            ></button>
+    <!-- About Section -->
+    <section id="about" class="about-section">
+      <div class="container">
+        <div class="row align-items-center">
+          <div class="col-lg-6">
+            <h2 class="section-title">About Universe Explorer</h2>
+            <p class="about-text">
+              Universe Explorer is a comprehensive platform designed for
+              astronomy enthusiasts, students, and researchers to explore and
+              learn about our incredible universe.
+            </p>
+            <p class="about-text">
+              Our mission is to make cosmic data accessible and understandable
+              to everyone, from casual stargazers to professional astronomers.
+            </p>
+            <div class="about-features">
+              <div class="feature-item">
+                <i class="fas fa-check-circle text-success me-2"></i>
+                <span>Verified scientific data from reliable sources</span>
+              </div>
+              <div class="feature-item">
+                <i class="fas fa-check-circle text-success me-2"></i>
+                <span
+                  >Regular updates with latest astronomical discoveries</span
+                >
+              </div>
+              <div class="feature-item">
+                <i class="fas fa-check-circle text-success me-2"></i>
+                <span>User-friendly interface with intuitive navigation</span>
+              </div>
+              <div class="feature-item">
+                <i class="fas fa-check-circle text-success me-2"></i>
+                <span>Educational resources and learning materials</span>
+              </div>
+            </div>
           </div>
-          <div class="modal-body" id="objectDetailsContent">
-            <!-- Details will be loaded here -->
+          <div class="col-lg-6">
+            <div class="about-visual">
+              <div class="cosmic-grid">
+                <div class="grid-item"></div>
+                <div class="grid-item"></div>
+                <div class="grid-item"></div>
+                <div class="grid-item"></div>
+                <div class="central-object">
+                  <i class="fas fa-universe"></i>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="cosmic-footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 mb-4">
+            <h5>Universe Explorer</h5>
+            <p>Exploring the cosmos, one celestial object at a time.</p>
+            <div class="social-links">
+              <a href="#"><i class="fab fa-facebook"></i></a>
+              <a href="#"><i class="fab fa-twitter"></i></a>
+              <a href="#"><i class="fab fa-instagram"></i></a>
+              <a href="#"><i class="fab fa-github"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6 mb-4">
+            <h6>Quick Links</h6>
+            <ul class="footer-links">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="#features">Features</a></li>
+              <li><a href="#about">About</a></li>
+              <li><a href="login.html">Login</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4">
+            <h6>Resources</h6>
+            <ul class="footer-links">
+              <li><a href="#">Documentation</a></li>
+              <li><a href="#">API Access</a></li>
+              <li><a href="#">Data Sources</a></li>
+              <li><a href="#">Help Center</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4">
+            <h6>Contact</h6>
+            <ul class="footer-links">
+              <li>
+                <i class="fas fa-envelope me-2"></i> info@universe-explorer.com
+              </li>
+              <li><i class="fas fa-phone me-2"></i> +1 (555) 123-4567</li>
+              <li>
+                <i class="fas fa-map-marker-alt me-2"></i> Cosmic Research
+                Center
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <div class="row">
+            <div class="col-12">
+              <p class="text-center mb-0">
+                &copy; 2024 Universe Explorer. All rights reserved.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="script.js"></script>
+    <script src="assets/js/home.js"></script>
   </body>
 </html>
