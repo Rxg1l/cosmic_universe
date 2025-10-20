@@ -1,0 +1,121 @@
+/* Admin-specific styles */
+.admin-dashboard .sidebar {
+  background: linear-gradient(180deg, #1a1f2e 0%, #0f131f 100%);
+}
+
+.admin-dashboard .nav-link.active {
+  background: linear-gradient(90deg, rgba(0, 212, 255, 0.2), transparent);
+  border-left: 3px solid var(--accent-color);
+}
+
+.admin-dashboard .stat-card {
+  background: linear-gradient(135deg, var(--secondary-bg) 0%, #1e2333 100%);
+}
+
+/* User management specific styles */
+.user-cell {
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar-sm {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.user-info {
+  flex: 1;
+}
+
+.user-name {
+  font-weight: 600;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.user-email {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Badge styles for roles */
+.badge.bg-danger {
+  background: linear-gradient(45deg, #ff4757, #ff6b81) !important;
+}
+.badge.bg-warning {
+  background: linear-gradient(45deg, #ffaa00, #ffc048) !important;
+}
+.badge.bg-info {
+  background: linear-gradient(45deg, #00d4ff, #48dbfb) !important;
+}
+.badge.bg-primary {
+  background: linear-gradient(45deg, #9d4edd, #b56eff) !important;
+}
+
+/* Table actions */
+.btn-group .btn {
+  padding: 0.25rem 0.5rem;
+}
+
+/* Modal enhancements */
+.modal-content {
+  background: var(--secondary-bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+.modal-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.modal-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Chart placeholders */
+.chart-placeholder {
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: 8px;
+  border: 2px dashed rgba(255, 255, 255, 0.1);
+}
+
+/* Quick actions grid */
+.quick-actions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.action-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  text-decoration: none;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.action-btn:hover {
+  background: rgba(0, 212, 255, 0.1);
+  border-color: var(--accent-color);
+  color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.action-btn i {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.action-btn span {
+  font-size: 0.9rem;
+  font-weight: 500;
+}

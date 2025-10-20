@@ -1,0 +1,65 @@
+/* Additional custom styles */
+.bg-purple {
+  background-color: #6f42c1 !important;
+}
+
+.credibility-high {
+  color: #28a745;
+  font-weight: bold;
+}
+
+.credibility-medium {
+  color: #ffc107;
+  font-weight: bold;
+}
+
+.credibility-low {
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.object-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  border-radius: 15px;
+}
+
+.object-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.stats-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 15px;
+}
+
+.type-indicator {
+  width: 10px;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  border-radius: 10px 0 0 10px;
+}
+
+.type-planet {
+  background: #28a745;
+}
+.type-star {
+  background: #ffc107;
+}
+.type-moon {
+  background: #17a2b8;
+}
+.type-galaxy {
+  background: #007bff;
+}
+.type-nebula {
+  background: #6f42c1;
+}
+.type-blackhole {
+  background: #343a40;
+}

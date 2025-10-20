@@ -1,0 +1,188 @@
+/* User-specific styles */
+.user-dashboard .sidebar {
+  background: linear-gradient(180deg, #1a1f2e 0%, #1a1f2e 100%);
+}
+
+.user-dashboard .welcome-card {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 212, 255, 0.1),
+    rgba(157, 78, 221, 0.1)
+  );
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  border-radius: 15px;
+  padding: 2rem;
+}
+
+.user-dashboard .user-stats {
+  display: flex;
+  gap: 2rem;
+  justify-content: flex-end;
+}
+
+.user-dashboard .stat {
+  text-align: center;
+}
+
+.user-dashboard .stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent-color);
+  line-height: 1;
+}
+
+.user-dashboard .stat-label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+
+/* Quick Access Cards */
+.quick-access-card {
+  background: var(--secondary-bg);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 1.5rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  display: block;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.quick-access-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--accent-color);
+  text-decoration: none;
+  color: var(--text-primary);
+}
+
+.access-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.access-icon.primary {
+  background: rgba(0, 212, 255, 0.1);
+  color: #00d4ff;
+}
+.access-icon.success {
+  background: rgba(0, 255, 136, 0.1);
+  color: #00ff88;
+}
+.access-icon.warning {
+  background: rgba(255, 170, 0, 0.1);
+  color: #ffaa00;
+}
+.access-icon.info {
+  background: rgba(157, 78, 221, 0.1);
+  color: #9d4edd;
+}
+
+.access-content h5 {
+  margin: 0 0 0.5rem 0;
+  font-weight: 600;
+}
+
+.access-content p {
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Featured Objects */
+.featured-objects {
+  space-y: 1rem;
+}
+
+.featured-item {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+}
+
+.featured-item:last-child {
+  margin-bottom: 0;
+}
+
+.object-thumb {
+  width: 60px;
+  height: 60px;
+  border-radius: 8px;
+  margin-right: 1rem;
+  object-fit: cover;
+}
+
+.object-info {
+  flex: 1;
+}
+
+.object-info h6 {
+  margin: 0 0 0.25rem 0;
+  color: var(--text-primary);
+}
+
+.object-info p {
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+/* Learning Resources */
+.resources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.resource-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.resource-card:hover {
+  background: rgba(0, 212, 255, 0.1);
+  border-color: var(--accent-color);
+  transform: translateY(-2px);
+}
+
+.resource-icon {
+  font-size: 2rem;
+  color: var(--accent-color);
+  margin-bottom: 1rem;
+}
+
+.resource-card h6 {
+  margin: 0 0 0.5rem 0;
+  color: var(--text-primary);
+}
+
+.resource-card p {
+  color: var(--text-secondary);
+  margin: 0;
+  font-size: 0.8rem;
+}
+
+/* Activity items for user */
+.user-dashboard .activity-item {
+  padding: 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  margin-bottom: 0.75rem;
+}
+
+.user-dashboard .activity-item:last-child {
+  margin-bottom: 0;
+}

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Universe Explorer - Cosmic Objects Database</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      rel="stylesheet"
+    />
+    <link href="style.css" rel="stylesheet" />
+  </head>
+  <body class="dark-theme">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark cosmic-nav">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+          <i class="fas fa-rocket me-2"></i>
+          <strong>Universe Explorer</strong>
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav me-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#">
+                <i class="fas fa-stars"></i> Cosmic Objects
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="fas fa-chart-bar"></i> Analytics
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <i class="fas fa-cog"></i> Settings
+              </a>
+            </li>
+          </ul>
+          <div class="navbar-nav">
+            <div class="nav-item">
+              <span class="nav-link text-warning">
+                <i class="fas fa-database me-1"></i>
+                <span id="objectCount">0</span> Objects
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid mt-4">
+      <div class="row">
+        <!-- Sidebar -->
+        <div class="col-lg-2 col-md-3 d-none d-md-block">
+          <div class="cosmic-sidebar">
+            <div class="sidebar-header">
+              <h5>Filters</h5>
+            </div>
+            <div class="sidebar-content">
+              <div class="mb-3">
+                <label class="form-label">Object Type</label>
+                <select class="form-select cosmic-select" id="typeFilter">
+                  <option value="">All Types</option>
+                  <option value="Planet">Planet</option>
+                  <option value="Star">Star</option>
+                  <option value="Moon">Moon</option>
+                  <option value="Galaxy">Galaxy</option>
+                  <option value="Nebula">Nebula</option>
+                  <option value="Black Hole">Black Hole</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Search</label>
+                <input
+                  type="text"
+                  class="form-control cosmic-input"
+                  id="searchInput"
+                  placeholder="Search objects..."
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Credibility</label>
+                <select
+                  class="form-select cosmic-select"
+                  id="credibilityFilter"
+                >
+                  <option value="">All Ratings</option>
+                  <option value="High">High</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Low">Low</option>
+                </select>
+              </div>
+              <button
+                class="btn btn-outline-warning w-100"
+                onclick="resetFilters()"
+              >
+                <i class="fas fa-refresh me-2"></i>Reset Filters
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="col-lg-10 col-md-9">
+          <!-- Header Stats -->
+          <div class="row mb-4">
+            <div class="col-xl-3 col-md-6">
+              <div class="cosmic-card stat-card planet-card">
+                <div class="stat-icon">
+                  <i class="fas fa-globe-americas"></i>
+                </div>
+                <div class="stat-content">
+                  <h3 id="planetCount">0</h3>
+                  <p>Planets</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="cosmic-card stat-card star-card">
+                <div class="stat-icon">
+                  <i class="fas fa-sun"></i>
+                </div>
+                <div class="stat-content">
+                  <h3 id="starCount">0</h3>
+                  <p>Stars</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="cosmic-card stat-card galaxy-card">
+                <div class="stat-icon">
+                  <i class="fas fa-star-and-crescent"></i>
+                </div>
+                <div class="stat-content">
+                  <h3 id="galaxyCount">0</h3>
+                  <p>Galaxies</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-xl-3 col-md-6">
+              <div class="cosmic-card stat-card total-card">
+                <div class="stat-icon">
+                  <i class="fas fa-infinity"></i>
+                </div>
+                <div class="stat-content">
+                  <h3 id="totalCount">0</h3>
+                  <p>Total Objects</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Bar -->
+          <div class="cosmic-card action-bar mb-4">
+            <div class="row align-items-center">
+              <div class="col-md-6">
+                <h4 class="mb-0">
+                  <i class="fas fa-stars me-2 text-warning"></i>
+                  Cosmic Objects Database
+                </h4>
+              </div>
+              <div class="col-md-6 text-end">
+                <button
+                  class="btn btn-primary me-2"
+                  data-bs-toggle="modal"
+                  data-bs-target="#addObjectModal"
+                >
+                  <i class="fas fa-plus me-2"></i>Add New Object
+                </button>
+                <button
+                  class="btn btn-outline-info"
+                  onclick="loadCosmicObjects()"
+                >
+                  <i class="fas fa-refresh me-2"></i>Refresh
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Loading -->
+          <div id="loading" class="text-center py-5">
+            <div class="cosmic-loading">
+              <div class="planet-loader">
+                <div class="orbit">
+                  <div class="planet"></div>
+                </div>
+              </div>
+              <h4 class="mt-3 text-light">Exploring the Universe...</h4>
+              <p class="text-muted">Loading cosmic objects data</p>
+            </div>
+          </div>
+
+          <!-- Data Grid -->
+          <div id="dataContainer" style="display: none">
+            <div class="row" id="cosmicObjectsGrid">
+              <!-- Cards will be inserted here by JavaScript -->
+            </div>
+          </div>
+
+          <!-- Error Message -->
+          <div
+            id="errorMessage"
+            class="alert alert-danger cosmic-alert"
+            style="display: none"
+          >
+            <i class="fas fa-exclamation-triangle me-2"></i>
+            <span id="errorText"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Add Object Modal -->
+    <div class="modal fade" id="addObjectModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content cosmic-modal">
+          <div class="modal-header">
+            <h5 class="modal-title">
+              <i class="fas fa-plus me-2"></i>Add New Cosmic Object
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form id="addObjectForm">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Object Name *</label>
+                    <input
+                      type="text"
+                      class="form-control cosmic-input"
+                      name="name"
+                      required
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Type *</label>
+                    <select
+                      class="form-select cosmic-select"
+                      name="type"
+                      required
+                    >
+                      <option value="">Select Type</option>
+                      <option value="Planet">Planet</option>
+                      <option value="Star">Star</option>
+                      <option value="Moon">Moon</option>
+                      <option value="Galaxy">Galaxy</option>
+                      <option value="Nebula">Nebula</option>
+                      <option value="Black Hole">Black Hole</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Diameter (km)</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      class="form-control cosmic-input"
+                      name="diameter_km"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="mb-3">
+                    <label class="form-label">Mass (kg)</label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      class="form-control cosmic-input"
+                      name="mass_kg"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label"
+                      >Distance from Earth (light years)</label
+                    >
+                    <input
+                      type="number"
+                      step="0.01"
+                      class="form-control cosmic-input"
+                      name="distance_from_earth_ly"
+                    />
+                  </div>
+                  <div class="mb-3">
+                    <label class="form-label">Constellation</label>
+                    <input
+                      type="text"
+                      class="form-control cosmic-input"
+                      name="constellation"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Description</label>
+                <textarea
+                  class="form-control cosmic-input"
+                  name="description"
+                  rows="3"
+                  placeholder="Enter object description..."
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Cancel
+            </button>
+            <button
+              type="button"
+              class="btn btn-primary"
+              onclick="addCosmicObject()"
+            >
+              <i class="fas fa-save me-2"></i>Save Object
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Object Details Modal -->
+    <div class="modal fade" id="objectDetailsModal" tabindex="-1">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content cosmic-modal">
+          <div class="modal-header">
+            <h5 class="modal-title" id="detailsModalTitle">
+              <i class="fas fa-info-circle me-2"></i>Object Details
+            </h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body" id="objectDetailsContent">
+            <!-- Details will be loaded here -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
